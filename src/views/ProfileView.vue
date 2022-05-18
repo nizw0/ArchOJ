@@ -28,7 +28,8 @@ export default {
         axios
           .get('https://api.nizw0.com/users/', { params: { userId } })
           .then((res) => {
-            profile.value = res.data[0]
+            window.console.log(res)
+            profile.value = res.data
           })
           .catch((err) => {
             window.console.log(err)
