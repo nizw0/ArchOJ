@@ -26,6 +26,17 @@ export type AmplifyDependentResourcesAttributes = {
             "ApiId": "string"
         }
     },
+    "auth": {
+        "archojb72b727e": {
+            "IdentityPoolId": "string",
+            "IdentityPoolName": "string",
+            "UserPoolId": "string",
+            "UserPoolArn": "string",
+            "UserPoolName": "string",
+            "AppClientIDWeb": "string",
+            "AppClientID": "string"
+        }
+    },
     "function": {
         "PathCheck": {
             "Name": "string",
