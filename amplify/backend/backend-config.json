@@ -6,7 +6,7 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "PathCheck",
+          "resourceName": "UserProfile",
           "attributes": [
             "Name",
             "Arn"
@@ -99,6 +99,11 @@
   },
   "function": {
     "PathCheck": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "UserProfile": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
