@@ -26,7 +26,7 @@ export default {
         })
       if (userId !== null) {
         axios
-          .post('https://api.nizw0.com/users/', { userId })
+          .get('https://api.nizw0.com/users/', { params: { userId } })
           .then((res) => {
             profile.value = res.data[0]
           })
