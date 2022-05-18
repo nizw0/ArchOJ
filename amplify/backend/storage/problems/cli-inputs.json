@@ -1,0 +1,10 @@
+{
+  "resourceName": "problems",
+  "tableName": "problems",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

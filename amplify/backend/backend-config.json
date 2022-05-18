@@ -119,6 +119,10 @@
     "UserProfile": {
       "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
+    },
+    "problems": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
     }
   }
 }
