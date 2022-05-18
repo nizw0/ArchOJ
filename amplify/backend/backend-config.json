@@ -110,5 +110,10 @@
       "type": "cicd"
     }
   },
-  "storage": {}
+  "storage": {
+    "UserProfile": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    }
+  }
 }
