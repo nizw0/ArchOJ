@@ -1,19 +1,33 @@
 <template>
   <div>
-    <p>id: {{ profile.id }}</p>
-    <p>name: {{ profile.name }}</p>
-    <p>phone: {{ profile.phone }}</p>
+    <div v-if="editLock">
+      <p>id: {{ profile.id }}</p>
+      <p>name: {{ profile.name }}</p>
+      <p>phone: {{ profile.phone }}</p>
+    </div>
+    <div v-else>
+      <p>id: {{ profile.id }}</p>
+      <p>name: <input type="text" v-model="profile.name" /></p>
+      <p>phone: <input type="text" v-model="profile.phone" /></p>
+    </div>
+    <button @click="editLock = !editLock">編輯</button>
+    <button v-if="!editLock" @click="editUserProfile(profile)">確認</button>
   </div>
 </template>
 
 <script>
 import { Auth } from 'aws-amplify'
 import axios from 'axios'
-import { onMounted, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 
 export default {
   setup() {
-    const profile = ref({})
+    let profile = reactive({
+      id: '',
+      name: '',
+      phone: ''
+    })
+    let editLock = ref(true)
 
     async function fetchUserProfile() {
       const userId = await Auth.currentUserInfo()
@@ -28,17 +42,35 @@ export default {
         axios
           .get('https://api.nizw0.com/users/', { params: { userId } })
           .then((res) => {
-            window.console.log(res)
-            profile.value = res.data
+            // window.console.log(res)
+            // profile.value = res.data
+            Object.assign(profile, res.data)
+            window.console.log(profile)
           })
           .catch((err) => {
             window.console.log(err)
           })
       }
     }
+    async function editUserProfile() {
+      await axios
+        .put('https://api.nizw0.com/users/', {
+          userId: profile.id,
+          name: profile.name,
+          phone: profile.phone
+        })
+        .then((res) => {
+          Object.assign(profile, res)
+          window.console.log(res)
+        })
+        .catch((err) => {
+          window.console.log(err)
+        })
+      editLock.value = true
+    }
 
     onMounted(async () => fetchUserProfile())
-    return { profile }
+    return { profile, editLock, editUserProfile }
   }
 }
 </script>
