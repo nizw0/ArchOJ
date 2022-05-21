@@ -5,7 +5,7 @@
 const AWS = require('aws-sdk')
 const DynamoDB = new AWS.DynamoDB.DocumentClient()
 
-let tableName = 'UserProfile'
+let tableName = 'Users'
 if (process.env.ENV && process.env.ENV !== 'NONE') {
   tableName = tableName + '-' + process.env.ENV
 }
@@ -22,13 +22,13 @@ exports.handler = async (event) => {
   }
 
   if (method === 'GET') {
-    const userId = event.queryStringParameters.userId
-    body = (await get(userId))?.Item
+    const id = event.queryStringParameters.userId
+    body = (await get(id))?.Item
   } else if (method === 'PUT') {
     console.log('PUT EVENT')
     const props = JSON.parse(event.body)
     const profile = {
-      id: props.userId,
+      id: props.id,
       name: props.name,
       phone: props.phone
     }

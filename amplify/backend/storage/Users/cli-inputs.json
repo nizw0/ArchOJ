@@ -1,6 +1,6 @@
 {
-  "resourceName": "UserProfile",
-  "tableName": "UserProfile",
+  "resourceName": "Users",
+  "tableName": "Users",
   "partitionKey": {
     "fieldName": "id",
     "fieldType": "string"

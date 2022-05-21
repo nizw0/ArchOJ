@@ -3,7 +3,7 @@
   "paths": {
     "/": {
       "name": "/",
-      "lambdaFunction": "PathCheck",
+      "lambdaFunction": "Problem",
       "permissions": {
         "setting": "open"
       }

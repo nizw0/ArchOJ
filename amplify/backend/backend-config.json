@@ -1,4 +1,37 @@
 {
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "type": "cicd"
+    }
+  },
+  "function": {
+    "PathCheck": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "User": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "Problem": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "storage": {
+    "Users": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    },
+    "Problems": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    }
+  },
   "api": {
     "users": {
       "service": "API Gateway",
@@ -6,7 +39,7 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "UserProfile",
+          "resourceName": "User",
           "attributes": [
             "Name",
             "Arn"
@@ -20,7 +53,7 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "PathCheck",
+          "resourceName": "Problem",
           "attributes": [
             "Name",
             "Arn"
@@ -29,20 +62,6 @@
       ]
     },
     "submissions": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "PathCheck",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        }
-      ]
-    },
-    "workspaces": {
       "service": "API Gateway",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
@@ -69,10 +88,24 @@
           ]
         }
       ]
+    },
+    "workspaces": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "PathCheck",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   },
   "auth": {
-    "archojb72b727e": {
+    "archoj2c6d02ff": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -95,39 +128,6 @@
           "EMAIL"
         ]
       }
-    }
-  },
-  "function": {
-    "PathCheck": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "UserProfile": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "problems": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "hosting": {
-    "amplifyhosting": {
-      "service": "amplifyhosting",
-      "type": "cicd"
-    }
-  },
-  "storage": {
-    "UserProfile": {
-      "service": "DynamoDB",
-      "providerPlugin": "awscloudformation"
-    },
-    "problems": {
-      "service": "DynamoDB",
-      "providerPlugin": "awscloudformation"
     }
   }
 }
