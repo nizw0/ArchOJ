@@ -1,0 +1,14 @@
+{
+  "resourceName": "TestCases",
+  "tableName": "TestCases",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "problem_id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

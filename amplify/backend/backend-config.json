@@ -30,6 +30,10 @@
     "Problems": {
       "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
+    },
+    "TestCases": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
     }
   },
   "api": {
