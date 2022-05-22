@@ -17,6 +17,12 @@ export type AmplifyDependentResourcesAttributes = {
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
+        },
+        "TestCase": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
         }
     },
     "storage": {
@@ -69,6 +75,11 @@ export type AmplifyDependentResourcesAttributes = {
             "ApiId": "string"
         },
         "workspaces": {
+            "RootUrl": "string",
+            "ApiName": "string",
+            "ApiId": "string"
+        },
+        "testcases": {
             "RootUrl": "string",
             "ApiName": "string",
             "ApiId": "string"

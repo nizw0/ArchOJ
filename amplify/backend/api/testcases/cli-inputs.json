@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/": {
+      "name": "/",
+      "lambdaFunction": "TestCase",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
