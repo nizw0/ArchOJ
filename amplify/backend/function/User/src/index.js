@@ -25,16 +25,13 @@ exports.handler = async (event) => {
     const id = event.queryStringParameters.userId
     body = (await get(id))?.Item
   } else if (method === 'PUT') {
-    console.log('PUT EVENT')
     const props = JSON.parse(event.body)
     const profile = {
       id: props.id,
       name: props.name,
       phone: props.phone
     }
-    const res = await put({ profile })
-    console.log('res', res)
-    console.log('FINISH')
+    await put({ profile })
   } else {
     statusCode = 400
   }

@@ -25,15 +25,12 @@ exports.handler = async (event) => {
     const id = event.queryStringParameters.problemId
     body = (await get(id))?.Item
   } else if (method === 'PUT') {
-    console.log('PUT EVENT')
     const props = JSON.parse(event.body)
     const problem = {
       id: props.id,
       description: props.description
     }
-    const res = await put({ problem })
-    console.log('res', res)
-    console.log('FINISH')
+    await put({ problem })
   } else {
     statusCode = 400
   }
@@ -68,7 +65,7 @@ async function put(props) {
     },
     UpdateExpression: 'set description = :description',
     ExpressionAttributeValues: {
-      ':description': props.profile.description
+      ':description': props.problem.description
     },
     ReturnValues: 'UPDATED_NEW'
   }
