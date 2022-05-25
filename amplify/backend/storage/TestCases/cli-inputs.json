@@ -9,6 +9,14 @@
     "fieldName": "problem_id",
     "fieldType": "string"
   },
-  "gsi": [],
+  "gsi": [
+    {
+      "name": "problem_id",
+      "partitionKey": {
+        "fieldName": "problem_id",
+        "fieldType": "string"
+      }
+    }
+  ],
   "triggerFunctions": []
 }

@@ -23,11 +23,13 @@ exports.handler = async (event) => {
 
   if (method === 'GET') {
     const id = event.queryStringParameters.testCaseId
-    body = (await get(id))?.Item
+    const problemId = event.queryStringParameters.problemId
+    body = (await get(id, problemId))?.Items
   } else if (method === 'PUT') {
     const props = JSON.parse(event.body)
     const testCase = {
-      id: props.id,
+      testCaseId: props.testCaseId,
+      problemId: props.problemId,
       input: props.input,
       output: props.output
     }
@@ -44,14 +46,21 @@ exports.handler = async (event) => {
   }
 }
 
-async function get(testCaseId) {
+async function get(testCaseId, problemId) {
+  if (!testCaseId || !problemId) {
+    return
+  }
+  const filterExpression = 'id = :id AND problem_id = :problem_id'
+  const expressionAttributeValues = {
+    ':id': testCaseId,
+    ':problem_id': problemId
+  }
   const params = {
     TableName: tableName,
-    Key: {
-      id: testCaseId
-    }
+    FilterExpression: filterExpression,
+    ExpressionAttributeValues: expressionAttributeValues
   }
-  return await DynamoDB.get(params, function (err, data) {
+  return await DynamoDB.scan(params, function (err, data) {
     if (err) console.log(err)
     else console.log(data)
   }).promise()
@@ -62,9 +71,14 @@ async function put(props) {
   const params = {
     TableName: tableName,
     Key: {
-      id: props.testCase.id
+      id: props.testCase.testCaseId,
+      problem_id: props.testCase.problemId
     },
-    UpdateExpression: 'set input = :input, output = :output',
+    UpdateExpression: 'set #input = :input, #output = :output',
+    ExpressionAttributeNames: {
+      '#input': 'input',
+      '#output': 'output'
+    },
     ExpressionAttributeValues: {
       ':input': props.testCase.input,
       ':output': props.testCase.output
