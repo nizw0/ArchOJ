@@ -1,6 +1,6 @@
 {
-  "resourceName": "Users",
-  "tableName": "Users",
+  "resourceName": "Problems",
+  "tableName": "Problems",
   "partitionKey": {
     "fieldName": "id",
     "fieldType": "string"

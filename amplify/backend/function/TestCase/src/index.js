@@ -25,6 +25,15 @@ exports.handler = async (event) => {
     const id = event.queryStringParameters.testCaseId
     const problemId = event.queryStringParameters.problemId
     body = (await get(id, problemId))?.Items
+  } else if (method === 'POST') {
+    const props = JSON.parse(event.body)
+    const testCase = {
+      testCaseId: props.testCaseId,
+      problemId: props.problemId,
+      input: props.input,
+      output: props.output
+    }
+    await post({ testCase })
   } else if (method === 'PUT') {
     const props = JSON.parse(event.body)
     const testCase = {
@@ -61,6 +70,23 @@ async function get(testCaseId, problemId) {
     ExpressionAttributeValues: expressionAttributeValues
   }
   return await DynamoDB.scan(params, function (err, data) {
+    if (err) console.log(err)
+    else console.log(data)
+  }).promise()
+}
+
+async function post(props) {
+  console.log(props)
+  const params = {
+    TableName: tableName,
+    Item: {
+      id: props.testCase.testCaseId,
+      problem_id: props.testCase.problemId,
+      input: props.testCase.input,
+      output: props.testCase.output
+    }
+  }
+  return await DynamoDB.put(params, function (err, data) {
     if (err) console.log(err)
     else console.log(data)
   }).promise()

@@ -14,13 +14,14 @@
       <p>output: {{ testCase.output }}</p>
     </div>
     <div v-else>
-      <p>id: {{ testCase.id }}</p>
+      <p>id: <input type="text" v-model="testCase.id" /></p>
       <p>problem id: <input type="text" v-model="testCase.problemId" /></p>
       <p>input: <input type="text" v-model="testCase.input" /></p>
       <p>output: <input type="text" v-model="testCase.output" /></p>
     </div>
     <button @click="editLock = !editLock">編輯</button>
     <button v-if="!editLock" @click="editTestCase(testCase.id)">確認</button>
+    <button v-if="!editLock" @click="createTestCase(testCase.id)">新增</button>
   </div>
 </template>
 
@@ -68,8 +69,25 @@ export default {
         })
       editLock.value = true
     }
+    async function createTestCase() {
+      await axios
+        .post('https://api.nizw0.com/testcases/', {
+          testCaseId: testCase.id,
+          problemId: testCase.problemId,
+          input: testCase.input,
+          output: testCase.output
+        })
+        .then((res) => {
+          Object.assign(testCase, res.data[0])
+          window.console.log(testCase)
+        })
+        .catch((err) => {
+          window.console.log(err)
+        })
+      editLock.value = true
+    }
 
-    return { testCase, editLock, fetchTestCase, editTestCase }
+    return { testCase, editLock, fetchTestCase, editTestCase, createTestCase }
   }
 }
 </script>
