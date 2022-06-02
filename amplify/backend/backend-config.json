@@ -25,6 +25,11 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "Submission": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "storage": {
@@ -37,6 +42,10 @@
       "providerPlugin": "awscloudformation"
     },
     "TestCases": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    },
+    "Submissions": {
       "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
     }
@@ -76,7 +85,7 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "PathCheck",
+          "resourceName": "Submission",
           "attributes": [
             "Name",
             "Arn"

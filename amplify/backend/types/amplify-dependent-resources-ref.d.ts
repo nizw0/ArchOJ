@@ -23,6 +23,12 @@ export type AmplifyDependentResourcesAttributes = {
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
+        },
+        "Submission": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
         }
     },
     "storage": {
@@ -50,6 +56,14 @@ export type AmplifyDependentResourcesAttributes = {
             "PartitionKeyType": "string",
             "SortKeyName": "string",
             "SortKeyType": "string",
+            "Region": "string"
+        },
+        "Submissions": {
+            "Name": "string",
+            "Arn": "string",
+            "StreamArn": "string",
+            "PartitionKeyName": "string",
+            "PartitionKeyType": "string",
             "Region": "string"
         }
     },
