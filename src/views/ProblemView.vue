@@ -2,8 +2,8 @@
   <div>
     <div>
       輸入題目編號︰
-      <input type="text" v-model="problem.id" />
-      <button @click="fetchProblem(problem.id)">送出</button>
+      <input class="form-control" type="text" v-model="problem.id" />
+      <button class="btn" @click="fetchProblem(problem.id)">送出</button>
     </div>
     <div v-if="editLock">
       <p>id: {{ problem.id }}</p>
@@ -11,10 +11,14 @@
     </div>
     <div v-else>
       <p>id: {{ problem.id }}</p>
-      <p>description: <input type="text" v-model="problem.description" /></p>
+      <p>description: <input class="form-control" type="text" v-model="problem.description" /></p>
     </div>
-    <button @click="editLock = !editLock">編輯</button>
-    <button v-if="!editLock" @click="editProblem(problem.id)">確認</button>
+    <div class="text-center">
+      <div class="btn-group">
+        <button class="btn btn-primary" @click="editLock = !editLock">編輯</button>
+        <button class="btn btn-success" v-if="!editLock" @click="editProblem(problem.id)">確認</button>
+      </div>
+    </div>
   </div>
 </template>
 

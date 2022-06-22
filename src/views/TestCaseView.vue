@@ -2,10 +2,10 @@
   <div>
     <div>
       輸入測資編號︰
-      <input type="text" v-model="testCase.id" /><br />
+      <input class="form-control" type="text" v-model="testCase.id" /><br />
       輸入題目編號︰
-      <input type="text" v-model="testCase.problemId" />
-      <button @click="fetchTestCase(testCase.id, testCase.problemId)">送出</button>
+      <input class="form-control" type="text" v-model="testCase.problemId" />
+      <br />
     </div>
     <div v-if="editLock">
       <p>id: {{ testCase.id }}</p>
@@ -14,14 +14,19 @@
       <p>output: {{ testCase.output }}</p>
     </div>
     <div v-else>
-      <p>id: <input type="text" v-model="testCase.id" /></p>
-      <p>problem id: <input type="text" v-model="testCase.problemId" /></p>
-      <p>input: <input type="text" v-model="testCase.input" /></p>
-      <p>output: <input type="text" v-model="testCase.output" /></p>
+      <p>id: <input class="form-control" type="text" v-model="testCase.id" /></p>
+      <p>problem id: <input class="form-control" type="text" v-model="testCase.problemId" /></p>
+      <p>input: <input class="form-control" type="text" v-model="testCase.input" /></p>
+      <p>output: <input class="form-control" type="text" v-model="testCase.output" /></p>
     </div>
-    <button @click="editLock = !editLock">編輯</button>
-    <button v-if="!editLock" @click="editTestCase(testCase.id)">確認</button>
-    <button v-if="!editLock" @click="createTestCase(testCase.id)">新增</button>
+    <div class="text-center">
+      <div class="btn-group">
+        <button class="btn btn-success" @click="fetchTestCase(testCase.id, testCase.problemId)">送出</button>
+        <button class="btn btn-primary" @click="editLock = !editLock">編輯</button>
+        <button class="btn btn-warning" v-if="!editLock" @click="editTestCase(testCase.id)">確認</button>
+        <button class="btn btn-light" v-if="!editLock" @click="createTestCase(testCase.id)">新增</button>
+      </div>
+    </div>
   </div>
 </template>
 

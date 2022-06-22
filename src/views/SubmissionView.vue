@@ -2,27 +2,31 @@
   <div>
     <div>
       輸入繳交編號︰
-      <input type="text" v-model="submission.id" /><br />
-      <button @click="fetchSubmission(submission.id, submission.problemId)">送出</button>
+      <input class="form-control" type="text" v-model="submission.id" /><br />
     </div>
     <div v-if="editLock">
       <p>id: {{ submission.id }}</p>
-      <p>problem id: {{ submission.problemId }}</p>
+      <p>problem id: {{ submission.problem_id }}</p>
       <p>code: {{ submission.code }}</p>
       <p>language: {{ submission.language }}</p>
       <p>status: {{ submission.status }}</p>
       <p>result: {{ submission.result }}</p>
     </div>
     <div v-else>
-      <p>id: <input type="text" v-model="submission.id" /></p>
-      <p>problem id: <input type="text" v-model="submission.problemId" /></p>
-      <p>code: <input type="text" v-model="submission.code" /></p>
-      <p>language: <input type="text" v-model="submission.language" /></p>
+      <p>id: <input class="form-control" type="text" v-model="submission.id" /></p>
+      <p>problem id: <input class="form-control" type="text" v-model="submission.problem_id" /></p>
+      <p>code: <input class="form-control" type="text" v-model="submission.code" /></p>
+      <p>language: <input class="form-control" type="text" v-model="submission.language" /></p>
       <p>status: {{ submission.status }}</p>
       <p>result: {{ submission.result }}</p>
     </div>
-    <button @click="editLock = !editLock">編輯</button>
-    <button v-if="!editLock" @click="createSubmission(submission.id)">確認</button>
+    <div class="text-center">
+      <div class="btn-group">
+        <button class="btn btn-success" @click="fetchSubmission(submission.id, submission.problem_id)">送出</button>
+        <button class="btn btn-primary" @click="editLock = !editLock">編輯</button>
+        <button class="btn btn-warning" v-if="!editLock" @click="createSubmission(submission.id)">確認</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -36,7 +40,7 @@ export default {
       id: '',
       code: '',
       language: '',
-      problemId: '',
+      problem_id: '',
       status: '',
       result: ''
     })
@@ -61,7 +65,7 @@ export default {
           submissionId: submission.id,
           code: submission.code,
           language: submission.language,
-          problemId: submission.problemId
+          problemId: submission.problem_id
         })
         .then((res) => {
           Object.assign(submission, res.data)

@@ -7,11 +7,15 @@
     </div>
     <div v-else>
       <p>id: {{ profile.id }}</p>
-      <p>name: <input type="text" v-model="profile.name" /></p>
-      <p>phone: <input type="text" v-model="profile.phone" /></p>
+      <p>name: <input class="form-control" type="text" v-model="profile.name" /></p>
+      <p>phone: <input class="form-control" type="text" v-model="profile.phone" /></p>
     </div>
-    <button @click="editLock = !editLock">編輯</button>
-    <button v-if="!editLock" @click="editUserProfile(profile)">確認</button>
+    <div class="text-center">
+      <div class="btn-group">
+        <button class="btn btn-primary" @click="editLock = !editLock">編輯</button>
+        <button class="btn btn-success" v-if="!editLock" @click="editUserProfile(profile)">確認</button>
+      </div>
+    </div>
   </div>
 </template>
 
