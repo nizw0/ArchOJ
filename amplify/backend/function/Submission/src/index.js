@@ -29,7 +29,8 @@ exports.handler = async (event) => {
     const submission = {
       id: props.submissionId,
       code: props.code,
-      language: props.language
+      language: props.language,
+      problemId: props.problemId
     }
     await post({ submission })
   } else {
@@ -70,7 +71,10 @@ async function post(props) {
     Item: {
       id: props.submission.id,
       code: props.submission.code,
-      language: props.submission.language
+      language: props.submission.language,
+      problemId: props.problemId,
+      status: 'yet',
+      result: ''
     }
   }
   return await DynamoDB.put(params, function (err, data) {

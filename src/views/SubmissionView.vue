@@ -7,13 +7,19 @@
     </div>
     <div v-if="editLock">
       <p>id: {{ submission.id }}</p>
+      <p>problem id: {{ submission.problemId }}</p>
       <p>code: {{ submission.code }}</p>
       <p>language: {{ submission.language }}</p>
+      <p>status: {{ submission.status }}</p>
+      <p>result: {{ submission.result }}</p>
     </div>
     <div v-else>
       <p>id: <input type="text" v-model="submission.id" /></p>
+      <p>problem id: <input type="text" v-model="submission.problemId" /></p>
       <p>code: <input type="text" v-model="submission.code" /></p>
       <p>language: <input type="text" v-model="submission.language" /></p>
+      <p>status: {{ submission.status }}</p>
+      <p>result: {{ submission.result }}</p>
     </div>
     <button @click="editLock = !editLock">編輯</button>
     <button v-if="!editLock" @click="createSubmission(submission.id)">確認</button>
@@ -29,7 +35,10 @@ export default {
     let submission = reactive({
       id: '',
       code: '',
-      language: ''
+      language: '',
+      problemId: '',
+      status: '',
+      result: ''
     })
     let editLock = ref(true)
 
@@ -51,7 +60,8 @@ export default {
         .post('https://api.nizw0.com/submissions/', {
           submissionId: submission.id,
           code: submission.code,
-          language: submission.language
+          language: submission.language,
+          problemId: submission.problemId
         })
         .then((res) => {
           Object.assign(submission, res.data)
