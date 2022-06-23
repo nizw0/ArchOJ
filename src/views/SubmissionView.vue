@@ -15,7 +15,7 @@
     <div v-else>
       <p>id: <input class="form-control" type="text" v-model="submission.id" /></p>
       <p>problem id: <input class="form-control" type="text" v-model="submission.problem_id" /></p>
-      <p>code: <input class="form-control" type="text" v-model="submission.code" /></p>
+      <p>code: <textarea class="form-control" type="text" v-model="submission.code" /></p>
       <p>language: <input class="form-control" type="text" v-model="submission.language" /></p>
       <p>status: {{ submission.status }}</p>
       <p>result: {{ submission.result }}</p>
