@@ -72,7 +72,7 @@ async function post(props) {
       id: props.submission.id,
       code: props.submission.code,
       language: props.submission.language,
-      problemId: props.problemId,
+      problem_id: props.submission.problemId,
       status: 'yet',
       result: ''
     }
